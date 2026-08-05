@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 480">
+  <rect width="520" height="480" fill="#1B2240"/>
+  <circle cx="452" cy="60" r="120" fill="#4257E0" opacity="0.12"/>
+  <circle cx="60" cy="430" r="90" fill="#4257E0" opacity="0.10"/>
+  
+    <rect x="150" y="100" width="220" height="320" rx="30" fill="#4257E0"/>
+    <circle cx="260" cy="200" r="52" fill="#1B2240"/>
+    <circle cx="260" cy="200" r="26" fill="#4257E0" opacity="0.55"/>
+    <circle cx="260" cy="330" r="66" fill="#1B2240"/>
+    <circle cx="260" cy="330" r="36" fill="#4257E0" opacity="0.55"/>
+    <circle cx="260" cy="330" r="12" fill="#1B2240"/>
+  <text x="34" y="446" font-family="ui-monospace, monospace" font-size="20"
+        letter-spacing="4" fill="#FFFFFF" opacity="0.55">VLT-AUD-007</text>
+</svg>

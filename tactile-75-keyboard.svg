@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 480">
+  <rect width="520" height="480" fill="#26221B"/>
+  <circle cx="452" cy="60" r="120" fill="#E08A1F" opacity="0.12"/>
+  <circle cx="60" cy="430" r="90" fill="#E08A1F" opacity="0.10"/>
+  
+    <rect x="80" y="180" width="360" height="150" rx="18" fill="#E08A1F"/>
+    <rect x="100" y="200" width="34" height="34" rx="7" fill="#26221B" opacity="0.75"/><rect x="144" y="200" width="34" height="34" rx="7" fill="#26221B" opacity="0.75"/><rect x="188" y="200" width="34" height="34" rx="7" fill="#26221B" opacity="0.75"/><rect x="232" y="200" width="34" height="34" rx="7" fill="#26221B" opacity="0.75"/><rect x="276" y="200" width="34" height="34" rx="7" fill="#26221B" opacity="0.75"/><rect x="320" y="200" width="34" height="34" rx="7" fill="#26221B" opacity="0.75"/><rect x="364" y="200" width="34" height="34" rx="7" fill="#26221B" opacity="0.75"/><rect x="408" y="200" width="34" height="34" rx="7" fill="#26221B" opacity="0.75"/><rect x="100" y="244" width="34" height="34" rx="7" fill="#26221B" opacity="0.75"/><rect x="144" y="244" width="34" height="34" rx="7" fill="#26221B" opacity="0.75"/><rect x="188" y="244" width="34" height="34" rx="7" fill="#26221B" opacity="0.75"/><rect x="232" y="244" width="34" height="34" rx="7" fill="#26221B" opacity="0.75"/><rect x="276" y="244" width="34" height="34" rx="7" fill="#26221B" opacity="0.75"/><rect x="320" y="244" width="34" height="34" rx="7" fill="#26221B" opacity="0.75"/><rect x="364" y="244" width="34" height="34" rx="7" fill="#26221B" opacity="0.75"/><rect x="408" y="244" width="34" height="34" rx="7" fill="#26221B" opacity="0.75"/>
+    <rect x="144" y="288" width="232" height="26" rx="8" fill="#26221B" opacity="0.75"/>
+  <text x="34" y="446" font-family="ui-monospace, monospace" font-size="20"
+        letter-spacing="4" fill="#FFFFFF" opacity="0.55">VLT-PER-002</text>
+</svg>

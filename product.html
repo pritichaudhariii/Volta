@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}{{ p.name }} — VOLTA{% endblock %}
+{% block content %}
+
+<p class="crumbs mono"><a href="{{ url_for('shop.home') }}">Catalog</a> / <a href="{{ url_for('shop.home', category=p.category) }}">{{ p.category }}</a> / {{ p.name }}</p>
+
+<section class="product">
+  <div class="product-img">
+    <img src="{{ url_for('static', filename='img/' + p.image) }}" alt="{{ p.name }}">
+  </div>
+
+  <div class="product-info">
+    <p class="card-brand mono">{{ p.brand }} · {{ p.sku }}</p>
+    <h1>{{ p.name }}</h1>
+    <p class="rating">
+      <span class="stars">{{ p.rating|stars }}</span>
+      <span class="mono">{{ '%.1f'|format(p.rating) }} · {{ p.review_count }} review{{ 's' if p.review_count != 1 }}</span>
+    </p>
+    <p class="product-desc">{{ p.description }}</p>
+
+    <div class="buy-box">
+      <div class="buy-row">
+        <span>Price</span>
+        <span class="price mono big">{{ p.price_cents|money }}</span>
+      </div>
+      <div class="buy-row">
+        <span>Status</span>
+        {% if p.stock > 5 %}<span class="stock-ok mono">IN STOCK ({{ p.stock }})</span>
+        {% elif p.stock > 0 %}<span class="stock-low mono">LOW STOCK — {{ p.stock }} LEFT</span>
+        {% else %}<span class="stock-out mono">OUT OF STOCK</span>{% endif %}
+      </div>
+      {% if p.stock > 0 %}
+      <form action="{{ url_for('shop.cart_add', product_id=p.id) }}" method="post" class="buy-row">
+        <label for="qty">Qty</label>
+        <select id="qty" name="qty">
+          {% for n in range(1, [p.stock, 10]|min + 1) %}<option>{{ n }}</option>{% endfor %}
+        </select>
+        <button class="btn" type="submit">Add to cart</button>
+      </form>
+      {% else %}
+      <button class="btn" disabled>Out of stock</button>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <h2>Reviews</h2>
+
+  {% if reviews %}
+    {% for r in reviews %}
+    <article class="review">
+      <header>
+        <strong>{{ r.user_name }}</strong>
+        <span class="stars">{{ r.rating|stars }}</span>
+        <span class="mono review-date">{{ r.created_at[:10] }}</span>
+      </header>
+      {% if r.comment %}<p>{{ r.comment }}</p>{% endif %}
+    </article>
+    {% endfor %}
+  {% else %}
+    <p class="empty">No reviews yet — be the first.</p>
+  {% endif %}
+
+  {% if current_user and not my_review %}
+  <form class="review-form" action="{{ url_for('shop.add_review', slug=p.slug) }}" method="post">
+    <h3>Write a review</h3>
+    <label>Rating
+      <select name="rating" required>
+        <option value="">Choose…</option>
+        {% for n in range(5, 0, -1) %}<option value="{{ n }}">{{ n }} — {{ ['poor','fair','good','great','superb'][n-1] }}</option>{% endfor %}
+      </select>
+    </label>
+    <label>Comment
+      <textarea name="comment" rows="3" placeholder="What should other buyers know?"></textarea>
+    </label>
+    <button class="btn" type="submit">Post review</button>
+  </form>
+  {% elif current_user and my_review %}
+    <p class="mono fineprint">You've reviewed this product.</p>
+  {% else %}
+    <p class="fineprint"><a href="{{ url_for('auth.login') }}">Sign in</a> to write a review.</p>
+  {% endif %}
+</section>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Cart — VOLTA{% endblock %}
+{% block content %}
+<h1>Your cart</h1>
+
+{% if rows %}
+<section class="cart-layout">
+  <div class="cart-list">
+    {% for r in rows %}
+    <article class="cart-row">
+      <img src="{{ url_for('static', filename='img/' + r.image) }}" alt="">
+      <div class="cart-row-info">
+        <a href="{{ url_for('shop.product', slug=r.slug) }}"><strong>{{ r.name }}</strong></a>
+        <span class="mono sku">{{ r.sku }} · {{ r.price_cents|money }} each</span>
+      </div>
+      <form action="{{ url_for('shop.cart_update', product_id=r.id) }}" method="post" class="cart-qty">
+        <select name="qty" onchange="this.form.submit()" aria-label="Quantity">
+          {% for n in range(1, [r.stock, 10]|min + 1) %}
+            <option value="{{ n }}" {{ 'selected' if n == r.qty }}>{{ n }}</option>
+          {% endfor %}
+        </select>
+        <button name="qty" value="0" class="link-btn" title="Remove">remove</button>
+      </form>
+      <span class="price mono">{{ r.line_cents|money }}</span>
+    </article>
+    {% endfor %}
+  </div>
+
+  <aside class="summary">
+    <h2 class="mono">ORDER SUMMARY</h2>
+    <dl>
+      <div><dt>Subtotal</dt><dd class="mono">{{ subtotal|money }}</dd></div>
+      <div><dt>Shipping</dt><dd class="mono">{{ 'FREE' if subtotal >= 10000 else '$9.00' }}</dd></div>
+      <div><dt>Tax (est. 10%)</dt><dd class="mono">{{ ((subtotal * 0.1)|round|int)|money }}</dd></div>
+    </dl>
+    <a class="btn btn-wide" href="{{ url_for('shop.checkout') }}">Check out</a>
+    <p class="fineprint">Free shipping on orders over $100.</p>
+  </aside>
+</section>
+{% else %}
+<p class="empty">Your cart is empty. <a href="{{ url_for('shop.home') }}">Browse the catalog</a>.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}VOLTA — gear that works{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="wordmark" href="{{ url_for('shop.home') }}">VOLTA<span class="bolt">⚡</span></a>
+
+    <form class="search" action="{{ url_for('shop.home') }}" method="get" role="search">
+      <input type="search" name="q" value="{{ q or '' }}" placeholder="Search gear…" aria-label="Search products">
+      <button type="submit">Search</button>
+    </form>
+
+    <nav class="nav-links">
+      <a href="{{ url_for('shop.cart') }}" class="cart-link">
+        Cart{% if cart_count %} <span class="badge">{{ cart_count }}</span>{% endif %}
+      </a>
+      {% if current_user %}
+        <a href="{{ url_for('auth.profile') }}">{{ current_user.name.split(' ')[0] }}</a>
+        {% if current_user.is_admin %}<a href="{{ url_for('admin.dashboard') }}" class="admin-link">Admin</a>{% endif %}
+        <a href="{{ url_for('auth.logout') }}">Sign out</a>
+      {% else %}
+        <a href="{{ url_for('auth.login') }}">Sign in</a>
+      {% endif %}
+    </nav>
+  </div>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="wrap flashes">
+      {% for category, message in messages %}
+        <p class="flash flash-{{ category }}">{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<main class="wrap">
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span class="mono">VOLTA — demo storefront · payments are simulated · no real orders are fulfilled</span>
+  </div>
+</footer>
+
+</body>
+</html>

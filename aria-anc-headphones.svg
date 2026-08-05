@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 480">
+  <rect width="520" height="480" fill="#1B2240"/>
+  <circle cx="452" cy="60" r="120" fill="#4257E0" opacity="0.12"/>
+  <circle cx="60" cy="430" r="90" fill="#4257E0" opacity="0.10"/>
+  
+    <path d="M130 260 a130 130 0 0 1 260 0" fill="none" stroke="#4257E0" stroke-width="26" stroke-linecap="round"/>
+    <rect x="108" y="252" width="58" height="112" rx="24" fill="#4257E0"/>
+    <rect x="354" y="252" width="58" height="112" rx="24" fill="#4257E0"/>
+    <rect x="122" y="268" width="30" height="80" rx="14" fill="#1B2240" opacity="0.55"/>
+    <rect x="368" y="268" width="30" height="80" rx="14" fill="#1B2240" opacity="0.55"/>
+  <text x="34" y="446" font-family="ui-monospace, monospace" font-size="20"
+        letter-spacing="4" fill="#FFFFFF" opacity="0.55">VLT-AUD-001</text>
+</svg>

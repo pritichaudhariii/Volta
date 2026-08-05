@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 480">
+  <rect width="520" height="480" fill="#1D2B26"/>
+  <circle cx="452" cy="60" r="120" fill="#2FA57A" opacity="0.12"/>
+  <circle cx="60" cy="430" r="90" fill="#2FA57A" opacity="0.10"/>
+  
+    <rect x="96" y="170" width="328" height="190" rx="26" fill="#2FA57A"/>
+    <circle cx="260" cy="265" r="70" fill="#1D2B26"/>
+    <circle cx="260" cy="265" r="46" fill="#2FA57A" opacity="0.6"/>
+    <circle cx="238" cy="243" r="12" fill="#FFFFFF" opacity="0.7"/>
+    <rect x="130" y="140" width="90" height="46" rx="12" fill="#2FA57A"/>
+    <circle cx="392" cy="200" r="10" fill="#FFFFFF" opacity="0.85"/>
+  <text x="34" y="446" font-family="ui-monospace, monospace" font-size="20"
+        letter-spacing="4" fill="#FFFFFF" opacity="0.55">VLT-VID-003</text>
+</svg>

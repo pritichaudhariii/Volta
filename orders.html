@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Admin · Orders — VOLTA{% endblock %}
+{% block content %}
+<h1>Orders</h1>
+<nav class="admin-nav mono">
+  <a href="{{ url_for('admin.dashboard') }}">Overview</a>
+  <a href="{{ url_for('admin.products') }}">Products</a>
+  <a class="active" href="{{ url_for('admin.orders') }}">Orders</a>
+  <a href="{{ url_for('admin.users') }}">Users</a>
+</nav>
+{% if orders %}
+<table class="table">
+  <thead><tr><th>#</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th><th></th></tr></thead>
+  <tbody>
+  {% for o in orders %}
+    <tr>
+      <td class="mono"><a href="{{ url_for('shop.order', order_id=o.id) }}">#{{ o.id }}</a></td>
+      <td>{{ o.user_name }} <span class="fineprint">{{ o.email }}</span></td>
+      <td class="mono">{{ o.created_at[:16] }}</td>
+      <td class="mono">{{ o.total_cents|money }}</td>
+      <td><span class="status status-{{ o.status }} mono">{{ o.status|upper }}</span></td>
+      <td>
+        {% if o.status == 'paid' %}
+        <form action="{{ url_for('admin.deliver', order_id=o.id) }}" method="post">
+          <button class="link-btn" type="submit">mark delivered</button>
+        </form>
+        {% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}<p class="empty">No orders yet.</p>{% endif %}
+{% endblock %}

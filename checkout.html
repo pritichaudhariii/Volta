@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Checkout — VOLTA{% endblock %}
+{% block content %}
+<h1>Checkout</h1>
+<section class="cart-layout">
+  <form method="post" class="checkout-form">
+    <h2 class="mono">SHIPPING</h2>
+    <label>Full name <input name="ship_name" value="{{ ship_name }}" required></label>
+    <label>Address <input name="ship_address" value="{{ ship_address }}" required></label>
+    <div class="form-row">
+      <label>City <input name="ship_city" value="{{ ship_city }}" required></label>
+      <label>Postal code <input name="ship_postal" value="{{ ship_postal }}" required></label>
+    </div>
+    <label>Country <input name="ship_country" value="{{ ship_country }}" required></label>
+
+    <h2 class="mono">PAYMENT</h2>
+    <label class="radio"><input type="radio" name="payment_method" value="demo" checked>
+      Demo gateway <span class="fineprint">(simulated — swap in Stripe/PayPal for production)</span></label>
+
+    <button class="btn btn-wide" type="submit">Place order</button>
+  </form>
+
+  <aside class="summary">
+    <h2 class="mono">{{ rows|length }} ITEM{{ 'S' if rows|length != 1 }}</h2>
+    <dl>
+      {% for r in rows %}
+      <div><dt>{{ r.name }} × {{ r.qty }}</dt><dd class="mono">{{ r.line_cents|money }}</dd></div>
+      {% endfor %}
+      <div class="rule"><dt>Subtotal</dt><dd class="mono">{{ totals.items_cents|money }}</dd></div>
+      <div><dt>Shipping</dt><dd class="mono">{{ 'FREE' if totals.shipping_cents == 0 else totals.shipping_cents|money }}</dd></div>
+      <div><dt>Tax</dt><dd class="mono">{{ totals.tax_cents|money }}</dd></div>
+      <div class="total"><dt>Total</dt><dd class="mono">{{ totals.total_cents|money }}</dd></div>
+    </dl>
+  </aside>
+</section>
+{% endblock %}

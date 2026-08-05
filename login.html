@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Sign in — VOLTA{% endblock %}
+{% block content %}
+<section class="auth-card">
+  <h1>Sign in</h1>
+  <form method="post">
+    <label>Email <input type="email" name="email" required autofocus></label>
+    <label>Password <input type="password" name="password" required></label>
+    <button class="btn btn-wide" type="submit">Sign in</button>
+  </form>
+  <p class="fineprint">New here? <a href="{{ url_for('auth.register') }}">Create an account</a>.</p>
+  <p class="fineprint mono">demo: jordan@example.com / password123 · admin: admin@volta.dev / admin123</p>
+</section>
+{% endblock %}

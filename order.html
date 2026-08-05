@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Order #{{ o.id }} — VOLTA{% endblock %}
+{% block content %}
+<p class="crumbs mono"><a href="{{ url_for('auth.profile') }}">Account</a> / Order #{{ o.id }}</p>
+<div class="order-head">
+  <h1>Order #{{ o.id }}</h1>
+  <span class="status status-{{ o.status }} mono big">{{ o.status|upper }}</span>
+</div>
+
+<section class="cart-layout">
+  <div>
+    <h2 class="mono">ITEMS</h2>
+    <table class="table">
+      <thead><tr><th>Product</th><th>Qty</th><th>Price</th><th>Line</th></tr></thead>
+      <tbody>
+        {% for i in items %}
+        <tr>
+          <td>{{ i.name }}</td>
+          <td class="mono">{{ i.qty }}</td>
+          <td class="mono">{{ i.price_cents|money }}</td>
+          <td class="mono">{{ (i.price_cents * i.qty)|money }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h2 class="mono">SHIPPING TO</h2>
+    <p>{{ o.ship_name }}<br>{{ o.ship_address }}<br>{{ o.ship_city }}, {{ o.ship_postal }}<br>{{ o.ship_country }}</p>
+    {% if o.paid_at %}<p class="mono fineprint">Paid {{ o.paid_at[:16] }} UTC</p>{% endif %}
+    {% if o.delivered_at %}<p class="mono fineprint">Delivered {{ o.delivered_at[:16] }} UTC</p>{% endif %}
+  </div>
+
+  <aside class="summary">
+    <h2 class="mono">TOTALS</h2>
+    <dl>
+      <div><dt>Items</dt><dd class="mono">{{ o.items_cents|money }}</dd></div>
+      <div><dt>Shipping</dt><dd class="mono">{{ 'FREE' if o.shipping_cents == 0 else o.shipping_cents|money }}</dd></div>
+      <div><dt>Tax</dt><dd class="mono">{{ o.tax_cents|money }}</dd></div>
+      <div class="total"><dt>Total</dt><dd class="mono">{{ o.total_cents|money }}</dd></div>
+    </dl>
+    {% if o.status == 'placed' and o.user_id == current_user.id %}
+    <form action="{{ url_for('shop.pay', order_id=o.id) }}" method="post">
+      <button class="btn btn-wide" type="submit">Pay now (demo)</button>
+    </form>
+    {% endif %}
+  </aside>
+</section>
+{% endblock %}

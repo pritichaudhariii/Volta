@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="hero">
+  <div>
+    <p class="eyebrow mono">EST. 2026 · TESTED GEAR ONLY</p>
+    <h1>Equipment for people<br>who read the spec sheet.</h1>
+  </div>
+  <div class="hero-cats">
+    <a href="{{ url_for('shop.home') }}" class="chip {{ 'active' if not category }}">All</a>
+    {% for c in categories %}
+      <a href="{{ url_for('shop.home', category=c) }}" class="chip {{ 'active' if category == c }}">{{ c }}</a>
+    {% endfor %}
+  </div>
+</section>
+
+{% if q %}
+  <p class="result-note mono">{{ total }} result{{ 's' if total != 1 }} for “{{ q }}” — <a href="{{ url_for('shop.home') }}">clear</a></p>
+{% endif %}
+
+{% if products %}
+<section class="grid">
+  {% for p in products %}
+  <article class="card">
+    <a href="{{ url_for('shop.product', slug=p.slug) }}" class="card-img">
+      <img src="{{ url_for('static', filename='img/' + p.image) }}" alt="{{ p.name }}" loading="lazy">
+      {% if p.stock == 0 %}<span class="soldout mono">OUT OF STOCK</span>{% endif %}
+    </a>
+    <div class="card-body">
+      <p class="card-brand mono">{{ p.brand }} · {{ p.category }}</p>
+      <h2><a href="{{ url_for('shop.product', slug=p.slug) }}">{{ p.name }}</a></h2>
+      <p class="rating" title="{{ '%.1f'|format(p.rating) }} from {{ p.review_count }} reviews">
+        <span class="stars">{{ p.rating|stars }}</span>
+        <span class="mono">({{ p.review_count }})</span>
+      </p>
+    </div>
+    <div class="spec-plate">
+      <div class="plate-left">
+        <span class="mono sku">{{ p.sku }}</span>
+        <span class="charge" aria-label="{{ p.stock }} in stock">
+          {% for i in range(5) %}<i class="{{ 'on' if p.stock > i * 5 }}"></i>{% endfor %}
+        </span>
+      </div>
+      <span class="price mono">{{ p.price_cents|money }}</span>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+
+{% if pages > 1 %}
+<nav class="pager mono" aria-label="Pages">
+  {% for n in range(1, pages + 1) %}
+    <a href="{{ url_for('shop.home', page=n, q=q, category=category) }}"
+       class="{{ 'active' if n == page }}">{{ n }}</a>
+  {% endfor %}
+</nav>
+{% endif %}
+
+{% else %}
+  <p class="empty">Nothing matches. Try a different search or <a href="{{ url_for('shop.home') }}">browse everything</a>.</p>
+{% endif %}
+
+{% endblock %}

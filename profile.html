@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Your account — VOLTA{% endblock %}
+{% block content %}
+<h1>Your account</h1>
+<section class="profile-layout">
+  <form method="post" class="auth-card" style="margin:0">
+    <h2 class="mono">PROFILE</h2>
+    <label>Name <input type="text" name="name" value="{{ current_user.name }}"></label>
+    <label>New password <input type="password" name="password" minlength="8" placeholder="Leave blank to keep current"></label>
+    <button class="btn" type="submit">Save changes</button>
+  </form>
+
+  <div>
+    <h2 class="mono">ORDER HISTORY</h2>
+    {% if orders %}
+    <table class="table">
+      <thead><tr><th>Order</th><th>Date</th><th>Items</th><th>Total</th><th>Status</th><th></th></tr></thead>
+      <tbody>
+        {% for o in orders %}
+        <tr>
+          <td class="mono">#{{ o.id }}</td>
+          <td class="mono">{{ o.created_at[:10] }}</td>
+          <td>{{ o.item_count }}</td>
+          <td class="mono">{{ o.total_cents|money }}</td>
+          <td><span class="status status-{{ o.status }} mono">{{ o.status|upper }}</span></td>
+          <td><a href="{{ url_for('shop.order', order_id=o.id) }}">view</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="empty">No orders yet.</p>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

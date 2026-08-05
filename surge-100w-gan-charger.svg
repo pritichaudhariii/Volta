@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 480">
+  <rect width="520" height="480" fill="#2B1D2A"/>
+  <circle cx="452" cy="60" r="120" fill="#C24FA0" opacity="0.12"/>
+  <circle cx="60" cy="430" r="90" fill="#C24FA0" opacity="0.10"/>
+  
+    <rect x="150" y="120" width="220" height="290" rx="34" fill="#C24FA0"/>
+    <path d="M275 165 L225 275 h42 l-22 90 78 -128 h-46 l30 -72 z" fill="#2B1D2A"/>
+    <rect x="150" y="120" width="220" height="290" rx="34" fill="none" stroke="#2B1D2A" stroke-opacity="0.3" stroke-width="6"/>
+  <text x="34" y="446" font-family="ui-monospace, monospace" font-size="20"
+        letter-spacing="4" fill="#FFFFFF" opacity="0.55">VLT-PWR-004</text>
+</svg>

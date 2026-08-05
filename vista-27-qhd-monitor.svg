@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 480">
+  <rect width="520" height="480" fill="#20242B"/>
+  <circle cx="452" cy="60" r="120" fill="#5C8DEB" opacity="0.12"/>
+  <circle cx="60" cy="430" r="90" fill="#5C8DEB" opacity="0.10"/>
+  
+    <rect x="76" y="132" width="368" height="216" rx="16" fill="#5C8DEB"/>
+    <rect x="96" y="152" width="328" height="176" rx="8" fill="#20242B"/>
+    <path d="M96 328 L250 210 L330 268 L424 190 V328 Z" fill="#5C8DEB" opacity="0.5"/>
+    <rect x="228" y="352" width="64" height="34" fill="#5C8DEB"/>
+    <rect x="180" y="386" width="160" height="16" rx="8" fill="#5C8DEB"/>
+  <text x="34" y="446" font-family="ui-monospace, monospace" font-size="20"
+        letter-spacing="4" fill="#FFFFFF" opacity="0.55">VLT-DSP-005</text>
+</svg>

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Admin — VOLTA{% endblock %}
+{% block content %}
+<h1>Admin dashboard</h1>
+<nav class="admin-nav mono">
+  <a class="active" href="{{ url_for('admin.dashboard') }}">Overview</a>
+  <a href="{{ url_for('admin.products') }}">Products</a>
+  <a href="{{ url_for('admin.orders') }}">Orders</a>
+  <a href="{{ url_for('admin.users') }}">Users</a>
+</nav>
+
+<section class="stat-grid">
+  <div class="stat"><span class="stat-n mono">{{ s.revenue_cents|money }}</span><span class="mono">revenue (paid)</span></div>
+  <div class="stat"><span class="stat-n mono">{{ s.orders }}</span><span class="mono">orders</span></div>
+  <div class="stat"><span class="stat-n mono">{{ s.products }}</span><span class="mono">products</span></div>
+  <div class="stat"><span class="stat-n mono">{{ s.users }}</span><span class="mono">users</span></div>
+</section>
+
+<section class="cart-layout">
+  <div>
+    <h2 class="mono">RECENT ORDERS</h2>
+    {% if s.recent_orders %}
+    <table class="table">
+      <thead><tr><th>#</th><th>Customer</th><th>Date</th><th>Total</th><th>Status</th></tr></thead>
+      <tbody>
+      {% for o in s.recent_orders %}
+        <tr>
+          <td class="mono"><a href="{{ url_for('shop.order', order_id=o.id) }}">#{{ o.id }}</a></td>
+          <td>{{ o.user_name }}</td>
+          <td class="mono">{{ o.created_at[:10] }}</td>
+          <td class="mono">{{ o.total_cents|money }}</td>
+          <td><span class="status status-{{ o.status }} mono">{{ o.status|upper }}</span></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    {% else %}<p class="empty">No orders yet.</p>{% endif %}
+  </div>
+  <aside class="summary">
+    <h2 class="mono">LOW STOCK (≤5)</h2>
+    {% if s.low_stock %}
+    <dl>
+      {% for p in s.low_stock %}
+      <div><dt>{{ p.name }}</dt><dd class="mono {{ 'stock-out' if p.stock == 0 else 'stock-low' }}">{{ p.stock }}</dd></div>
+      {% endfor %}
+    </dl>
+    {% else %}<p class="fineprint">All products healthy.</p>{% endif %}
+  </aside>
+</section>
+{% endblock %}
