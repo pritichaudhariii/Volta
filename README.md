@@ -10,7 +10,6 @@ Product catalog · reviews & ratings · cart · checkout · order tracking · fu
 ![Flask](https://img.shields.io/badge/Flask-3.0+-000000?style=flat-square&logo=flask&logoColor=white)
 ![SQLite](https://img.shields.io/badge/SQLite-stdlib-003B57?style=flat-square&logo=sqlite&logoColor=white)
 ![Tested](https://img.shields.io/badge/E2E-Playwright-2EAD33?style=flat-square)
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
 </div>
 
@@ -217,10 +216,6 @@ This is a portfolio/demo app. Before real traffic you would:
 - [ ] Sales chart on the admin dashboard
 - [ ] Discount codes
 - [ ] Stripe integration behind a `PAYMENT_PROVIDER` flag
-
-## 📄 License
-
-MIT — use it, fork it, ship it.
 
 ---
 
